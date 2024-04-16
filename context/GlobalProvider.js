@@ -1,10 +1,47 @@
-import React from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-const GlobalProvider = () => {
+import { getCurrentUser } from "../lib/appwrite";
+
+const GlobalContext = createContext();
+
+export const useGlobalContext = () => useContext(GlobalContext);
+
+const GlobalProvider = ({ children }) => {
+    const [isLogged, setIsLogged] = useState(false);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        getCurrentUser()
+            .then((res) => {
+                if (res) {
+                    setIsLogged(true);
+                    setUser(res);
+                } else {
+                    setIsLogged(false);
+                    setUser(null);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
     return (
-        <div>
-            
-        </div>
+        <GlobalContext.Provider
+            value={{
+                isLogged,
+                setIsLogged,
+                user,
+                setUser,
+                loading,
+            }}
+        >
+            { children }
+        </GlobalContext.Provider>
     );
 };
 
