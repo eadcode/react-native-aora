@@ -41,20 +41,19 @@ const TabsLayout = () => {
             >
                 <Tabs.Screen
                     name="home"
-                    options={ {
-                        title: 'Home',
+                    options={{
+                        title: "Home",
                         headerShown: false,
                         tabBarIcon: ({ color, focused }) => (
                             <TabIcon
-                                icon={ icons.home }
-                                color={ color }
+                                icon={icons.home}
+                                color={color}
                                 name="Home"
-                                focused={ focused }
+                                focused={focused}
                             />
                         ),
-                    } }
+                    }}
                 />
-
                 <Tabs.Screen
                     name="bookmark"
                     options={{
@@ -86,7 +85,6 @@ const TabsLayout = () => {
                         ),
                     }}
                 />
-
                 <Tabs.Screen
                     name="profile"
                     options={{
@@ -103,6 +101,8 @@ const TabsLayout = () => {
                     }}
                 />
             </Tabs>
+
+            <StatusBar backgroundColor="#161622" style="light" />
         </>
     );
 };
