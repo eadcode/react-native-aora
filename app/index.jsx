@@ -3,22 +3,24 @@ import { Redirect, router } from 'expo-router';
 import { View, Text, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useGlobalContext } from "../context/GlobalProvider";
 import { images } from '../constants';
 import { CustomButton, Loader } from '../components';
+import { useGlobalContext } from '../context/GlobalProvider';
 
-const App = () => {
+const Welcome = () => {
     const { loading, isLogged } = useGlobalContext();
 
-    if (!loading && isLogged) return <Redirect href="/home" />;
+    if (! loading && isLogged) return <Redirect href="/home" />;
 
     return (
         <SafeAreaView className="bg-primary h-full">
-            <Loader isLoading={loading} />
+            <Loader isLoading={ loading } />
 
-            <ScrollView contentContainerStyle={ {
-                height: '100%',
-            } }>
+            <ScrollView
+                contentContainerStyle={ {
+                    height: '100%',
+                } }
+            >
                 <View className="w-full flex justify-center items-center h-full px-4">
                     <Image
                         source={ images.logo }
@@ -64,4 +66,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Welcome;
